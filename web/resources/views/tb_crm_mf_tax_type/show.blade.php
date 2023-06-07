@@ -3,10 +3,10 @@
 <div class="container">
     <div class="card shadow mb-4">
         <div class="card-header">
-            <a href="{{ route('tax-types.index') }}">Tax Types</a> | Show
+            <a href="{{ route('tax-types.index') }}" class="text-black text-decoration-none">TAX TYPES</a> | Show
         </div>
         <div class="card-body">
-            <div class="row mb-4">
+            <div class="row mb-3">
                 
                 @text([
                     'name' => 'id',
@@ -28,7 +28,7 @@
                     'disabled' => 1,
                 ])@endtext
     
-                <div class="col-lg-4 col-md-6 col-sm-12 mt-3">
+                <div class="col-lg-4 col-md-6 col-sm-12 mt-1">
                     @checkbox([
                         'name' => 'is_active',
                         'value' => $tax_type->is_active,
@@ -37,7 +37,7 @@
                 </div>
                 
             </div>
-            <a href="{{route('tax-types.edit', ['tax_type' => $tax_type->id])}}" class="btn btn-secondary"><i class="fa-solid fa-pencil"></i></a>
+            <a href="{{route('tax-types.edit', ['tax_type' => $tax_type->id])}}" class="btn btn-sm btn-secondary"><i class="fa-solid fa-pencil"></i></a>
         </div>
     </div>
 </div>

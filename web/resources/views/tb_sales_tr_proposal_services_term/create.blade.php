@@ -3,12 +3,12 @@
 <div class="container">
     <div class="card shadow mb-4">
         <div class="card-header">
-            <a href="{{route('proposal-services.edit', ['id' => $proposal_service_id])}}">Proposal Service Term</a> | Create
+            <a href="{{route('proposal-services.edit', ['id' => $proposal_service_id])}}" class="text-black text-decoration-none">PROPOSAL SERVICES TERM</a> | Create
         </div>
         <div class="card-body">
             <form method="POST" action="{{route('proposal-services-terms.store')}}" enctype="multipart/form-data">
                 @csrf
-                <div class="row mb-4">
+                <div class="row mb-1">
                     @text([
                         'name'          => 'id',
                         'disabled'      => 1,
@@ -33,7 +33,7 @@
                     ])@endtext
                 </div>
                 
-                <button type="submit" class="btn btn-secondary">
+                <button type="submit" class="btn btn-sm btn-secondary">
                     Submit
                 </button>
             </form>

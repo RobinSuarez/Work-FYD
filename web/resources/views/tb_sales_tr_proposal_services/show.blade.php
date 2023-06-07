@@ -3,10 +3,10 @@
 <div class="container">
     <div class="card shadow mb-4">
         <div class="card-header">
-            <a href="{{route('proposals.edit', ['proposal' => $proposal_service->proposal_id])}}">Proposal Service</a> | Show
+            <a href="{{route('proposals.edit', ['proposal' => $proposal_service->proposal_id])}}" class="text-black text-decoration-none">PROPOSAL SERVICE</a> | Show
         </div>
         <div class="card-body">
-            <div class="row mb-4">
+            <div class="row mb-1">
                 @text([
                         'name'          => 'id',
                         'value'         => $proposal_service->id,
@@ -60,7 +60,7 @@
                         'disabled'      => 1,
                     ])@endtext
 
-                    <div class="col-lg-4 col-md-6 col-sm-12 mt-3">
+                    <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
                         @checkbox([
                             'name'      => 'with_vat',
                             'value'     => old('with_vat') ?? $proposal_service->with_vat,
@@ -76,40 +76,25 @@
                         'disabled'      => 1,
                     ])@endtext
             </div>
-            @if($disabled == "0")
+            @if(($status_id ?? 0) == 1)
             <a href="{{ route('proposal-services.edit', ['id' => $proposal_service->id]) }}" class="btn btn-secondary"><i class="fa-solid fa-pencil"></i></a>
             @endif
         </div>
     </div>
 
-    <div class="card shadow mb-4">
-        <div class="card-header">
-            Proposal Services Terms
-        </div>
-        <div class="card-body">
-            <table class="table table-striped">
-                <thead class="table-light-blue">
-                    <tr>
-                        <td>NO.</td>
-                        <td>ID</td>
-                        <td>DUE DATE</td>
-                        <td>AMOUNT</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse ($proposal_service_terms as $proposal_service_term)
-                    <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td><a href="{{ route('proposal-services-terms.show', ['id' => $proposal_service_term->id]) }}">{{ sprintf('%08d', $proposal_service_term->id) }}</a></td>
-                        <td>{{ $proposal_service_term->due_date }}</td>
-                        <td>{{ $proposal_service_term->amount }}</td>
-                    </tr>
-                    @empty
-                    @endforelse
-                </tbody>
-            </table>
-        </div>
-    </div>
+    @dindex([
+        'ch'            => 'text-black text-decoration-none',
+        'title'         => 'PROPOSAL SERVICES TERMS',
+        'route'         => 'proposal-services-terms',
+        'header_var'    => 'id',
+        'header_pk'     => $proposal_service->id,
+        'detail_var'    => 'id',
+        'is_edit'       => 0,
+        'status_id'     => $status_id,
+        'columns'       =>  [['name' => 'due_date', 'label' => 'DUE DATE'], ['name' => 'amount', 'label' => 'AMOUNT'],
+        ],
+        'details'       => $proposal_service_terms,
+    ])@enddindex()
 
 </div>
 @endsection

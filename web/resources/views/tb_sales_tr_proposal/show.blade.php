@@ -3,10 +3,10 @@
 <div class="container">
     <div class="card shadow mb-4">
         <div class="card-header">
-            <a href="{{ route('proposals.index') }}">Proposal</a> | Show
+            <a href="{{ route('proposals.index') }}" class="text-black text-decoration-none">PROPOSALS</a> | Show
         </div>
         <div class="card-body">
-            <div class="row mb-4">
+            <div class="row mb-1">
                     @text([
                         'name' => 'id',
                         'value' => $proposal->id,
@@ -90,41 +90,25 @@
                 
             </div>
 
-            <a href="{{route('proposals.edit', ['proposal' => $proposal->id])}}" class="btn btn-secondary"><i class="fa-solid fa-pencil"></i></a>
+            <a href="{{route('proposals.edit', ['proposal' => $proposal->id])}}" class="btn btn-sm btn-secondary"><i class="fa-solid fa-pencil"></i></a>
         </div>
     </div>
 
-    <div class="card shadow mb-4">
-        <div class="card-header">
-            Proposal Services
-        </div>
-        <div class="card-body">
-            <table class="table table-striped">
-                <thead class="table-light-blue">
-                    <tr>
-                        <td>NO.</td>
-                        <td>ID</td>
-                        <td>SERVICE</td>
-                        <td>QTY</td>
-                        <td>PRICE</td>
-                        <td>TOTAL</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse ($proposal_services as $proposal_service)
-                    <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td><a href="{{ route('proposal-services.show', ['id' => $proposal_service->id]) }}">{{ sprintf('%08d', $proposal_service->id) }}</a></td>
-                        <td>{{ $proposal_service->service    }}</td>
-                        <td>{{ $proposal_service->qty }}</td>
-                        <td>{{ $proposal_service->price }}</td>
-                        <td>{{ $proposal_service->total }}</td>
-                    </tr>
-                    @empty
-                    @endforelse
-                </tbody>
-            </table>
-        </div>
-    </div>
+    @dindex([
+        'ch'            => 'text-black text-decoration-none',
+        'title'         => 'PROPOSAL SERVICES',
+        'route'         => 'proposal-services',
+        'header_var'    => 'id',
+        'header_pk'     => $proposal->id,
+        'detail_var'    => 'id',
+        'is_edit'       => 0,
+        'status_id'     => $proposal->status_id,
+        'columns'       =>  [['name' => 'service', 'label' => 'SERVICE'], ['name' => 'qty', 'label' => 'QTY'],
+                             ['name' => 'uom', 'label' => 'UOM'], ['name' => 'price', 'label' => 'PRICE'],
+                             ['name' => 'total', 'label' => 'TOTAL'], ['name' => 'with_vat', 'label' => 'W/ VAT', 'cb' => 1]
+        ],
+        'details'       => $proposal_services,
+        
+    ])@enddindex()
 </div>
 @endsection

@@ -3,12 +3,12 @@
 <div class="container">
     <div class="card shadow mb-4">
         <div class="card-header">
-            <a href="{{ route('proposals.index') }}">Proposal</a> | Create
+            <a href="{{ route('proposals.index') }}" class="text-black text-decoration-none">PROPOSALS</a> | Create
         </div>
         <div class="card-body">
             <form method="POST" action="{{route('proposals.store')}}" enctype="multipart/form-data">
                 @csrf
-                <div class="row mb-4">
+                <div class="row mb-3">
                     @text([
                         'name' => 'id',
                         'disabled' => 1,
@@ -80,7 +80,7 @@
                     ])@endselect
                 </div>
                 
-                <button type="submit" class="btn btn-secondary mt-4 btn-user form-btn" name="status" value="save">
+                <button type="submit" class="btn btn-sm btn-secondary mt-1 btn-user form-btn" name="status" value="save">
                     <i class="fa-solid fa-floppy-disk"></i> Save
                 </button>
     

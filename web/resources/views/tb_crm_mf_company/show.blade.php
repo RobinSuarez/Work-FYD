@@ -3,10 +3,10 @@
 <div class="container">
     <div class="card shadow mb-4">
         <div class="card-header">
-            <a href="{{ route('companies.index') }}">Companies</a> | Show
+            <a href="{{ route('companies.index') }}" class="text-black text-decoration-none">COMPANIES</a> | Show
         </div>
         <div class="card-body">
-            <div class="row mb-4">
+            <div class="row mb-3">
                 
                 @text([
                     'name' => 'id',
@@ -28,7 +28,7 @@
                     'disabled' => 1,
                 ])@endtext
     
-                <div class="col-lg-4 col-md-6 col-sm-12 mt-3">
+                <div class="col-lg-4 col-md-6 col-sm-12 mt-1">
                     @checkbox([
                         'name' => 'is_active',
                         'value' => $company->is_active,

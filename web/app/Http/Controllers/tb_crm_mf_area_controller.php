@@ -15,7 +15,6 @@ class tb_crm_mf_area_controller extends Controller
                                 ->sortable(['id', 'code', 'name', 'is_active'])
                                 ->paginate(env('ROW_COUNT', 10));
         return view('tb_crm_mf_area.index', ['areas' => $areas]);
-
     }
 
     public function create(){

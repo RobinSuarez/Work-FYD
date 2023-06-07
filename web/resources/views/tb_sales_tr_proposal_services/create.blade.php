@@ -3,12 +3,12 @@
 <div class="container">
     <div class="card shadow mb-4">
         <div class="card-header">
-            <a href="{{route('proposals.edit', ['proposal' => $proposal_id])}}">Proposal Service</a> | Create
+            <a href="{{route('proposals.edit', ['proposal' => $proposal_id])}}" class="text-black text-decoration-none">PROPOSAL SERVICE</a> | Create
         </div>
         <div class="card-body">
             <form method="POST" action="{{route('proposal-services.store')}}" enctype="multipart/form-data">
                 @csrf
-                <div class="row mb-4">
+                <div class="row mb-0">
                     @text([
                         'name'          => 'id',
                         'disabled'      => 1,
@@ -57,7 +57,7 @@
                         'type'          => 'number'
                     ])@endtext
 
-                    <div class="col-lg-4 col-md-6 col-sm-12 mt-3">
+                    <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
                         @checkbox([
                             'name' => 'with_vat',
                             'value' => old('with_vat') ?? 1
@@ -73,7 +73,7 @@
                     
                 </div>
                 
-                <button type="submit" class="btn btn-secondary">
+                <button type="submit" class="btn btn-sm btn-secondary">
                     Submit
                 </button>
             </form>

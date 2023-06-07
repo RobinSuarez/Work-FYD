@@ -3,10 +3,10 @@
 <div class="container">
     <div class="card shadow mb-4">
         <div class="card-header">
-            <a href="{{ route('contracts.index') }}">Contract</a> | Show
+            <a href="{{ route('contracts.index') }}" class="text-black text-decoration-none">CONTRACTS</a> | Show
         </div>
         <div class="card-body">
-            <div class="row mb-4">
+            <div class="row mb-1">
                     @text([
                         'name'      => 'id',
                         'value'     => $contract->id,
@@ -43,7 +43,7 @@
                 
             </div>
 
-            <a href="{{route('contracts.edit', ['contract' => $contract->id])}}" class="btn btn-secondary"><i class="fa-solid fa-pencil"></i></a>
+            <a href="{{route('contracts.edit', ['contract' => $contract->id])}}" class="btn btn-sm btn-secondary"><i class="fa-solid fa-pencil"></i></a>
         </div>
     </div>
 

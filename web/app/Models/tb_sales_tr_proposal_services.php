@@ -19,6 +19,7 @@ class tb_sales_tr_proposal_services extends Model
         'price',
         'with_vat',
         'seq',
+        'total',
     ];
 }
  

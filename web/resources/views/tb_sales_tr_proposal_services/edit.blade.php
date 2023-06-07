@@ -3,13 +3,13 @@
 <div class="container">
     <div class="card shadow mb-4">
         <div class="card-header">
-            <a href="{{route('proposals.edit', ['proposal' => $proposal_service->proposal_id])}}">Proposal Service</a> | Edit
+            <a href="{{route('proposals.edit', ['proposal' => $proposal_service->proposal_id])}}" class="text-black text-decoration-none">PROPOSAL SERVICE</a> | Edit
         </div>
         <div class="card-body">
             <form method="POST" action="{{route('proposal-services.update', ['id'=> $proposal_service->id])}}" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
-                <div class="row mb-4">
+                <div class="row mb-3">
                     @text([
                         'name'          => 'id',
                         'value'         => $proposal_service->id,
@@ -62,7 +62,7 @@
                         'type'          => 'number',
                     ])@endtext
 
-                    <div class="col-lg-4 col-md-6 col-sm-12 mt-3">
+                    <div class="col-lg-4 col-md-6 col-sm-12 mt-1">
                         @checkbox([
                             'name'      => 'with_vat',
                             'value'     => old('with_vat') ?? $proposal_service->with_vat,
@@ -78,71 +78,28 @@
                         'disabled'      => isset($disabled) ? $disabled : null,
                     ])@endtext
                 </div>
-                @if($disabled == "0")
-                <button type="submit" class="btn btn-secondary">
+                @if(($status_id ?? 0) == 1  )
+                <button type="submit" class="btn btn-sm btn-secondary">
                     Submit
                 </button>
                 @endif
             </form>
         </div> 
-
     </div>
 
-    <div class="card shadow mb-4">
-        <div class="card-header">
-            Proposal Services Terms
-        </div>
-        <div class="card-body">
-            @if($disabled == "0")
-            <div class="form d-inline">
-                <a href="{{ route('proposal-services-terms.create', ['id' => $proposal_service->id]) }}"
-                    class="btn btn-secondary mb-3 create-btn">
-                    <i class="fa-regular fa-plus"></i> New Record
-                </a>
-            </div>
-            @endif
-            <table class="table table-striped">
-                <thead class="table-light-blue">
-                    <tr>
-                        <td>NO.</td>
-                        <td>ID</td>
-                        <td>DUE DATE</td>
-                        <td>AMOUNT</td>
-                        @if($disabled == "0")
-                        <td>ACTIONS</td>
-                        @endif
-                    </tr>
-                </thead>
-                <tbody>
-                    @forelse ($proposal_service_terms as $proposal_service_term)
-                    <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td><a href="{{ route('proposal-services-terms.show', ['id' => $proposal_service_term->id]) }}">{{ sprintf('%08d', $proposal_service_term->id) }}</a></td>
-                        <td>{{ $proposal_service_term->due_date }}</td>
-                        <td>{{ $proposal_service_term->amount }}</td>
-                        @if($disabled == "0")
-                        <td>
-                            <div class="form d-inline">
-                                <a href="{{ route('proposal-services-terms.edit', ['id' => $proposal_service_term->id]) }}" class="btn btn-secondary action-btn">
-                                    <i class="fa-solid fa-pencil"></i>
-                                </a>
-                            </div>
-                            <form method="POST" class="form d-inline " action="{{ route('proposal-services-terms.destroy', ['id' => $proposal_service_term->id]) }} " class="d-inline" id="{{ $proposal_service_term->id }}" >
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" value="Delete!" class="btn btn-danger action-btn" onclick="return confirm('Are you sure you want to delete? This action is final')" form="{{ $proposal_service_term->id }}">
-                                    <i class="fa-regular fa-trash-can"></i>
-                                </button>
-                            </form>
-                        </td>
-                        @endif
-                    </tr>
-                    @empty
-                    @endforelse
-                </tbody>
-            </table>
-        </div>
-    </div>
+    @dindex([
+        'ch'            => 'text-black text-decoration-none',
+        'title'         => 'PROPOSAL SERVICES TERMS',
+        'route'         => 'proposal-services-terms',
+        'header_var'    => 'id',
+        'header_pk'     => $proposal_service->id,
+        'detail_var'    => 'id',
+        'is_edit'       => 1,
+        'status_id'     => $status_id,
+        'columns'       =>  [['name' => 'due_date', 'label' => 'DUE DATE'], ['name' => 'amount', 'label' => 'AMOUNT'],
+        ],
+        'details'       => $proposal_service_terms,
+    ])@enddindex()
 
 </div>
 @endsection

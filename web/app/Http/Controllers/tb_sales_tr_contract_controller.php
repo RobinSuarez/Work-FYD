@@ -67,12 +67,7 @@ class tb_sales_tr_contract_controller extends Controller
 
     public function edit($id){
         $contract = tb_sales_tr_contract::findOrFail($id);
-        $trans_status = $contract->status_id;
-        if ($trans_status == 1){
-            $disabled = "0";
-        }else{
-            $disabled = "1";
-        }
+        $status_id = $contract->status_id;
 
         $contract_proposals = tb_sales_tr_contract_proposal::join('tb_sales_tr_proposal', 'tb_sales_tr_proposal.id', 'tb_sales_tr_contract_proposal.proposal_id')
                                 ->select('tb_sales_tr_contract_proposal.id', 'tb_sales_tr_contract_proposal.contract_id', 'tb_sales_tr_contract_proposal.seq', 'tb_sales_tr_proposal.no as proposal')
@@ -81,7 +76,7 @@ class tb_sales_tr_contract_controller extends Controller
         return view ('tb_sales_tr_contract.edit', [
             'contract'              => $contract,
             'contract_proposals'    => $contract_proposals,
-            'disabled'              => $disabled,
+            'status_id'              => $status_id,
             'statuses'              => $statuses,
         ]);
     }

@@ -10,6 +10,7 @@ use App\Http\Requests\tb_sales_tr_proposal_services_request;
 use App\Models\tb_crm_mf_uom;
 use App\Models\tb_sales_tr_proposal;
 use App\Models\tb_sales_tr_proposal_services_term;
+use Illuminate\Support\Facades\DB;
 
 class tb_sales_tr_proposal_services_controller extends Controller
 { 
@@ -29,17 +30,13 @@ class tb_sales_tr_proposal_services_controller extends Controller
         $validatedData = $r->validated();
         $proposal_service->fill($validatedData);
         $proposal_service->save();
+        // $this->update_proposal_amount($proposal_service->proposal_id);
         return redirect()->route('proposals.edit', ['proposal' => $proposal_service->proposal_id])->with('status', 'Success!');
     }
     public function edit($id){
         $proposal_service = tb_sales_tr_proposal_services::findOrFail($id);
         $proposal = tb_sales_tr_proposal::findOrFail($proposal_service->proposal_id);
-        $trans_status = $proposal->status_id;
-        if ($trans_status == 1){
-            $disabled = "0";
-        }else{
-            $disabled = "1";
-        }
+        $status_id = $proposal->status_id;
         $services = tb_crm_mf_service::where('is_active', '=', 1)->get();
         $uoms = tb_crm_mf_uom::where('is_active', '=', 1)->get();
         $proposal_service_terms = tb_sales_tr_proposal_services_term::where('proposal_services_id', '=', $proposal_service->id)->get();
@@ -47,7 +44,7 @@ class tb_sales_tr_proposal_services_controller extends Controller
             'proposal_service'          => $proposal_service,
             'services'                  => $services,
             'uoms'                      => $uoms,
-            'disabled'                  => $disabled,
+            'status_id'                 => $status_id,
             'proposal_service_terms'    => $proposal_service_terms
         ]);
     }
@@ -57,18 +54,23 @@ class tb_sales_tr_proposal_services_controller extends Controller
         $validatedData = $r->validated();
         $proposal_service->fill($validatedData);
         $proposal_service->update();
+        // $this->update_proposal_amount($proposal_service->proposal_id);
         return redirect()->route('proposals.edit', [ 'proposal' => $proposal_service->proposal_id])->with('status', 'Success!');
     }
+
+    // private function update_proposal_amount($proposal_id){
+    //     $proposal = tb_sales_tr_proposal::findOrFail($proposal_id);
+    //     $proposal_services = tb_sales_tr_proposal_services::where('proposal_id', $proposal_id)->get();
+    //     $total = $proposal_services->sum('total');
+    //     $proposal->update([
+    //         'amount' => $total,
+    //     ]);
+    // }
 
     public function show($id){
         $proposal_service = tb_sales_tr_proposal_services::findOrFail($id);
         $proposal = tb_sales_tr_proposal::findOrFail($proposal_service->proposal_id);
-        $trans_status = $proposal->status_id;
-        if ($trans_status == 1){
-            $disabled = "0";
-        }else{
-            $disabled = "1";
-        }
+        $status_id = $proposal->status_id;
         $services = tb_crm_mf_service::where('id', '=', $proposal_service->service_id)->get();
         $uoms = tb_crm_mf_uom::where('id', '=', $proposal_service->uom_id)->get();
         $proposal_service_terms = tb_sales_tr_proposal_services_term::where('proposal_services_id', '=', $proposal_service->id)->get();
@@ -77,14 +79,16 @@ class tb_sales_tr_proposal_services_controller extends Controller
             'services'                  => $services,
             'uoms'                      => $uoms,
             'proposal_service_terms'    => $proposal_service_terms,
-            'disabled'                  => $disabled
+            'status_id'                  => $status_id
         ]);
     } 
 
     public function destroy(Request $r, $id){
         $proposal_service = tb_sales_tr_proposal_services::findOrFail($id);
+        $proposal_id = $proposal_service->proposal_id;
+        // return redirect()->back()->with('status', $proposal_id);
         $proposal_service->delete();
-        return redirect()->back()->with('status', 'Success!');
-        
+        // $this->update_proposal_amount($proposal_id);
+        return redirect()->route('proposals.edit', ['proposal' => $proposal_id])->with('status', 'Success!');
     }
 }

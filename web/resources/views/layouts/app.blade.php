@@ -50,7 +50,6 @@
                                 <a class='dropdown-item' href="\uoms">Unit of Measures</a>
                                 <a class='dropdown-item' href="\areas">Areas</a>
                                 <a class='dropdown-item' href="\companies">Companies</a>
-                                <a class='dropdown-item' href="\statuses">Statuses</a>
                             </div>
                         </li>
 
@@ -80,6 +79,7 @@
                             </a>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownRP">
                                 <a class="dropdown-item" href="\users">Users</a>
+                                <a class='dropdown-item' href="\statuses">Statuses</a>
                             </div>
                         </li>
                     </ul>
