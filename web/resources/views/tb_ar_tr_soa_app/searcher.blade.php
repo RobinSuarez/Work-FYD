@@ -3,7 +3,7 @@
 <div class="container">
     <div class="card shadow mb-4">
         <div class="card-header">
-            <a href="{{route('soas.edit', ['soa' => $soa_id])}}">SOA APP</a> | Searcher
+            <a href="{{route('soas.edit', ['soa' => $soa_id])}}" class="text-black text-decoration-none">SOA APP</a> | Searcher
         </div>
         <div class="card-body">
             <form method="POST" action="{{route('soa-apps.store')}}" enctype="multipart/form-data">
@@ -29,7 +29,7 @@
                     </tbody>
                 </table>
                 
-                <button type="submit" class="btn btn-secondary">
+                <button type="submit" class="btn btn-sm btn-secondary">
                     Submit
                 </button>
             </form>
@@ -68,7 +68,7 @@
                         <td>{{ $soa_app->service_name }}</td>
                         <td>{{ number_format($soa_app->amount, 2)}}</td>
                         @if($disabled == "0")
-                            <td class="td_add"><a href="#" class="btn btn-success add action-btn"><i class="fa-solid fa-plus"></i></a></td>
+                            <td class="td_add"><a href="#" class="btn btn-sm btn-success add action-btn"><i class="fa-solid fa-plus"></i></a></td>
                         @endif
                     </tr>
                     @empty
@@ -92,10 +92,10 @@
     });
 
     $(document).on('click', '.remove', function() {
-            var tr = $(this).parent().parent().clone();
-            var add_btn = "<td class='td_add'><a href='#' class='btn btn-success add action-btn'><i class='fa-solid fa-plus'></i></a></td>";
-            $(tr).find(".td_remove").after(add_btn).remove().end().appendTo('#tb_search');
-            $(this).parent().parent().remove();
+        var tr = $(this).parent().parent().clone();
+        var add_btn = "<td class='td_add'><a href='#' class='btn btn-success add action-btn'><i class='fa-solid fa-plus'></i></a></td>";
+        $(tr).find(".td_remove").after(add_btn).remove().end().appendTo('#tb_search');
+        $(this).parent().parent().remove();
     });
 
     </script>

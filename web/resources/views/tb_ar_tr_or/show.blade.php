@@ -86,7 +86,7 @@
                 
             </div>
 
-            <a href="{{route('ors.edit', ['or' => $or->id])}}" class="btn btn-secondary"><i class="fa-solid fa-pencil"></i></a>
+            <a href="{{route('ors.edit', ['or' => $or->id])}}" class="btn btn-sm btn-secondary"><i class="fa-solid fa-pencil"></i></a>
         </div>
     </div>
 

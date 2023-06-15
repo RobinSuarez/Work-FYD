@@ -70,21 +70,16 @@ class tb_ar_tr_soa_controller extends Controller
         ]);
     }
 
-    public function edit($id){
+    public function edit($id){ 
         $soa = tb_ar_tr_soa::findOrFail($id);
-        $trans_status = $soa->status_id;
-        if ($trans_status == 1){
-            $disabled = "0";
-        }else{
-            $disabled = "1";
-        }
+        $status_id = $soa->status_id;
         $clients = tb_crm_mf_client::where('is_active', '=', 1)->get();
         $soa_apps = DB::table('vw_ar_tr_soa_app')->where('soa_id', '=', $soa->id)->get();
         $statuses = tb_crm_mf_status::where('is_active', '=', 1)->get();
         return view ('tb_ar_tr_soa.edit', [
             'soa'       => $soa,
             'soa_apps'  => $soa_apps,
-            'disabled'  => $disabled,
+            'status_id'  => $status_id,
             'clients'   => $clients,
             'statuses'  => $statuses,
         ]);

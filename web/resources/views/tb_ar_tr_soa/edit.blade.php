@@ -7,13 +7,13 @@
 <div class="container">
     <div class="card shadow mb-4">
         <div class="card-header">
-            <a href="{{ route('soas.index') }}">Statement of Account</a> | Edit
+            <a href="{{ route('soas.index') }}" class="text-black text-decoration-none">STATEMENT OF ACCOUNT</a> | Edit
         </div>
         <div class="card-body">
             <form method="POST" action="{{route('soas.update', ['soa'=> $soa->id])}}" enctype="multipart/form-data" id="main-form">
                 @csrf
                 @method('PUT')
-                <div class="row mb-4">
+                <div class="row mb-1">
                     @text([
                         'name' => 'id',
                         'value' => $soa->id,
@@ -23,14 +23,14 @@
                     @datefield([
                         'name'  => 'date',
                         'value' => old('date') ?? $soa->date,
-                        'disabled' => $disabled
+                        'disabled' => ($status_id ?? 0) == 1 ? null : 1,
                     ])@enddatefield
 
                     @text([
                         'name' => 'no',
                         'value' => old('no') ?? $soa->no,
                         'placeholder' => 'Enter the NO',
-                        'disabled' => $disabled
+                        'disabled' => ($status_id ?? 0) == 1 ? null : 1,
                     ])@endtext
 
                     @select([
@@ -38,14 +38,14 @@
                         'label'     => 'CLIENT',
                         'elements'  => $clients,
                         'value'     => old('client_id') ?? $soa->client_id,
-                        'disabled' => $disabled
+                        'disabled'  => ($status_id ?? 0) == 1 ? null : 1,
                     ])@endselect
 
                     @textarea([
                         'name'          => 'remarks',
                         'value' => old('remarks') ?? $soa->remarks,
                         'placeholder'   => 'Enter the REMARKS',
-                        'disabled' => $disabled
+                        'disabled' => ($status_id ?? 0) == 1 ? null : 1,
                     ])@endtextarea()
 
                     @select([
@@ -57,25 +57,25 @@
                     ])@endselect
                 </div>
 
-                @if ($soa->status_id == 1)
-                    <button type="submit" class="btn btn-secondary mt-4 btn-user form-btn" name="status" value="save" form="main-form">
+                @if ($status_id == 1)
+                    <button type="submit" class="btn btn-sm btn-secondary btn-user form-btn" name="status" value="save" form="main-form">
                         <i class="fa-solid fa-pen-to-square"></i> Save
                     </button>
                     
-                    <button type="submit" class="btn btn-success mt-4 btn-user form-btn" name="status" value="post" form="main-form">
+                    <button type="submit" class="btn btn-sm btn-success btn-user form-btn" name="status" value="post" form="main-form">
                         <i class="fa-solid fa-check-to-slot"></i> Post
                     </button>
 
-                    <button type="submit" class="btn btn-danger mt-4 btn-user form-btn" name="status" value="cancel" form="main-form">
+                    <button type="submit" class="btn btn-sm btn-danger btn-user form-btn" name="status" value="cancel" form="main-form">
                         <i class="fa-solid fa-xmark"></i> Cancel
                     </button>
                 @elseif($soa->status_id == 2)
-                    <button type="submit" class="btn btn-secondary mt-4 btn-user form-btn" name="status" value="save" form="main-form">
+                    <button type="submit" class="btn btn-sm btn-secondary btn-user form-btn" name="status" value="save" form="main-form">
                         <i class="fa-solid fa-pen-to-square"></i> Change
                     </button>
 
                 @else
-                    <button type="submit" class="btn btn-secondary mt-4 btn-user form-btn" name="status" value="save" form="main-form">
+                    <button type="submit" class="btn btn-sm btn-secondary btn-user form-btn" name="status" value="save" form="main-form">
                         <i class="fa-solid fa-pen-to-square"></i> Change
                     </button>
 
@@ -86,17 +86,16 @@
 
     <div class="card shadow mb-4">
         <div class="card-header">
-            SOA Application
-        </div>
-        <div class="card-body">
-            @if($disabled == "0")
-            <div class="form d-inline">
+            SOA Application  
+            @if(($status_id ?? 0) == 1)
                 <a href="{{ route('soa-apps.searcher', ['id' => $soa->id]) }}"
-                    class="btn btn-secondary mb-3 create-btn">
+                    class="btn btn-secondary btn-sm border border-light float-end">
                     <i class="fa-solid fa-magnifying-glass"></i> Searcher
                 </a>
-            </div>
             @endif
+        </div>
+        <div class="card-body">
+           
             <table class="table table-striped">
                 <thead class="table-light-blue">
                     <tr>
@@ -109,7 +108,7 @@
                         <td>DUE DATE</td>
                         <td>SERVICE</td>
                         <td>AMOUNT</td>
-                        @if($disabled == "0")
+                        @if(($status_id ?? 0) == 1)
                             <td>ACTIONS</td>
                         @endif
                     </tr>
@@ -126,12 +125,12 @@
                         <td>{{ $soa_app->due_date }}</td>
                         <td>{{ $soa_app->service_name }}</td>
                         <td>{{ number_format($soa_app->amount, 2)}}</td>
-                        @if($disabled == "0")
+                        @if(($status_id ?? 0) == 1)
                         <td>
                             <form method="POST" class="form d-inline " action="{{ route('soa-apps.destroy', ['id' => $soa_app->id]) }} " class="d-inline" id="{{ $soa_app->id }}" >
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" value="Delete!" class="btn btn-danger action-btn" onclick="return confirm('Are you sure you want to delete? This action is final')" form="{{ $soa_app->id }}">
+                                <button type="submit" value="Delete!" class="btn btn-sm btn-danger action-btn" onclick="return confirm('Are you sure you want to delete? This action is final')" form="{{ $soa_app->id }}">
                                     <i class="fa-regular fa-trash-can"></i>
                                 </button>
                             </form>
@@ -144,6 +143,8 @@
             </table>
         </div>
     </div>
+
+
 </div>
 @endsection
 @section('scripts')

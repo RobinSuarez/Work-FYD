@@ -13,7 +13,7 @@
             <form method="POST" action="{{route('ors.update', ['or'=> $or->id])}}" enctype="multipart/form-data" id="main-form">
                 @csrf
                 @method('PUT')
-                <div class="row mb-4">
+                <div class="row mb-1">
                     @text([
                         'name' => 'id',
                         'value' => $or->id,
@@ -98,23 +98,22 @@
                         <i class="fa-solid fa-pen-to-square"></i> Save
                     </button> --}}
 
-                    <button type="submit" class="btn btn-success mt-4 btn-user form-btn" name="status" value="post" form="main-form">
+                    <button type="submit" class="btn btn-sm btn-success mt-1 btn-user form-btn" name="status" value="post" form="main-form">
                         <i class="fa-solid fa-check-to-slot"></i> Post
                     </button>
 
-                    <button type="submit" class="btn btn-danger mt-4 btn-user form-btn" name="status" value="cancel" form="main-form">
+                    <button type="submit" class="btn btn-sm btn-danger mt-1 btn-user form-btn" name="status" value="cancel" form="main-form">
                         <i class="fa-solid fa-xmark"></i> Cancel
                     </button>
                 @elseif($or->status_id == 2)
-                    <button type="submit" class="btn btn-secondary mt-4 btn-user form-btn" name="status" value="save" form="main-form">
+                    <button type="submit" class="btn btn-sm btn-secondary mt-1 btn-user form-btn" name="status" value="save" form="main-form">
                         <i class="fa-solid fa-pen-to-square"></i> Change
                     </button>
 
                 @else
-                    <button type="submit" class="btn btn-secondary mt-4 btn-user form-btn" name="status" value="save" form="main-form">
+                    <button type="submit" class="btn btn-sm btn-secondary mt-1 btn-user form-btn" name="status" value="save" form="main-form">
                         <i class="fa-solid fa-pen-to-square"></i> Change
                     </button>
-
                 @endif
             </form>
         </div>
@@ -130,7 +129,7 @@
                     @if($disabled == "0")
                     <div class="form d-inline">
                         <a href="{{ route('or-pay-cashes.create', ['id' => $or->id]) }}"
-                            class="btn btn-secondary mb-3 create-btn">
+                            class="btn btn-sm btn-secondary mb-3 create-btn">
                             <i class="fa-regular fa-plus"></i> New Record
                         </a>
                     </div>
@@ -159,14 +158,14 @@
                                 @if($disabled == "0")
                                 <td>
                                     <div class="form d-inline">
-                                        <a href="{{ route('or-pay-cashes.edit', ['id' => $or_pay_cash->id]) }}" class="btn btn-secondary action-btn">
+                                        <a href="{{ route('or-pay-cashes.edit', ['id' => $or_pay_cash->id]) }}" class="btn btn-sm btn-secondary action-btn">
                                             <i class="fa-solid fa-pencil"></i>
                                         </a>
                                     </div>
                                     <form method="POST" class="form d-inline " action="{{ route('or-pay-cashes.destroy', ['id' => $or_pay_cash->id]) }} " class="d-inline" id="{{ $or_pay_cash->id }}" >
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" value="Delete!" class="btn btn-danger action-btn" onclick="return confirm('Are you sure you want to delete? This action is final')" form="{{ $or_pay_cash->id }}">
+                                        <button type="submit" value="Delete!" class="btn btn-sm btn-danger action-btn" onclick="return confirm('Are you sure you want to delete? This action is final')" form="{{ $or_pay_cash->id }}">
                                             <i class="fa-regular fa-trash-can"></i>
                                         </button>
                                     </form>

@@ -15,14 +15,14 @@
                         'col'   => 'col-lg-4 col-md-6 col-sm-12 px-0',
                         'label_class' => ''
                     ])@endtext
-                    <button type="submit" class="btn btn-secondary form-btn mt-3"><i class="far fa-search" style="font-weight: 900"></i> Search</button>
+                    <button type="submit" class="btn btn-sm btn-secondary form-btn mt-3"><i class="far fa-search" style="font-weight: 900"></i> Search</button>
                 </div>
             </form>
         </div>
     </div>
     <div class="card shadow mt-3 mb-3">
         <div class="card-header">
-            <a href="{{ route('soas.index') }}">Statement of Account</a>
+            <a href="{{ route('soas.index') }}" class="text-black text-decoration-none" class="text-black text-decoration-none">STATEMENT OF ACCOUNT</a>
         </div>
         <div class ="card-body">
             <table class="table table-striped">
@@ -49,7 +49,7 @@
                             {{-- <td><input class="form-check-input" type="checkbox" value="1" {{ ($soa->is_active??0) == 1 ? "checked":""}} disabled></td> --}}
                             <td>
                                 <div class="form d-inline">
-                                    <a href="{{ route('soas.edit', ['soa' => $soa->id]) }}" class="btn btn-secondary action-btn">
+                                    <a href="{{ route('soas.edit', ['soa' => $soa->id]) }}" class="btn  btn-sm btn-secondary action-btn">
                                         <i class="fa-solid fa-pencil"></i>
                                     </a>
                                 </div>
@@ -57,7 +57,7 @@
                                     action="{{ route('soas.destroy', ['soa' => $soa->id]) }} " class="d-inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" value="Delete!" class="btn btn-danger action-btn" onclick="return confirm('Are you sure you want to delete? This action is final')">
+                                    <button type="submit" value="Delete!" class="btn  btn-sm btn-danger action-btn" onclick="return confirm('Are you sure you want to delete? This action is final')">
                                         <i class="fa-regular fa-trash-can"></i>
                                     </button>
                                 </form>
@@ -70,7 +70,7 @@
     
             <div class="form d-inline">
                 <a href="{{ route('soas.create') }}"
-                    class="btn btn-secondary mb-3 create-btn">
+                    class="btn  btn-sm btn-secondary create-btn">
                     <i class="fa-regular fa-plus"></i> New Record
                 </a>
             </div>

@@ -3,10 +3,10 @@
 <div class="container">
     <div class="card shadow mb-4">
         <div class="card-header">
-            <a href="{{ route('soas.index') }}">Statement of Account</a> | Show
+            <a href="{{ route('soas.index') }}" class="text-black text-decoration-none">STATEMENT OF ACCOUNT</a> | Show
         </div>
         <div class="card-body">
-            <div class="row mb-4">
+            <div class="row mb-1">
                     @text([
                         'name'      => 'id',
                         'value'     => $soa->id,
@@ -20,10 +20,10 @@
                     ])@enddatefield
 
                     @text([
-                        'name' => 'no',
-                        'value' => old('no') ?? $soa->no,
+                        'name'      => 'no',
+                        'value'     => old('no') ?? $soa->no,
                         'placeholder' => 'Enter the NO',
-                        'disabled' => 1,
+                        'disabled'  => 1,
                     ])@endtext
 
                     @select([
@@ -35,23 +35,23 @@
                     ])@endselect
 
                     @textarea([
-                        'name'          => 'remarks',
-                        'value' => old('remarks') ?? $soa->remarks,
+                        'name'      => 'remarks',
+                        'value'     => old('remarks') ?? $soa->remarks,
                         'placeholder'   => 'Enter the REMARKS',
-                        'disabled' => 1,
+                        'disabled'  => 1,
                     ])@endtextarea()
 
                     @select([
-                        'name' => 'status_id',
-                        'label' => 'STATUS',
+                        'name'      => 'status_id',
+                        'label'     => 'STATUS',
                         'elements'  => $statuses,
-                        'value' => old('status_id') ?? $soa->status_id,
-                        'disabled' => 1,
+                        'value'     => old('status_id') ?? $soa->status_id,
+                        'disabled'  => 1,
                     ])@endselect
                 
             </div>
 
-            <a href="{{route('soas.edit', ['soa' => $soa->id])}}" class="btn btn-secondary"><i class="fa-solid fa-pencil"></i></a>
+            <a href="{{route('soas.edit', ['soa' => $soa->id])}}" class="btn btn-sm btn-secondary"><i class="fa-solid fa-pencil"></i></a>
         </div>
     </div>
 

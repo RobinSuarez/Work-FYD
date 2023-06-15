@@ -7,12 +7,12 @@
 <div class="container">
     <div class="card shadow mb-4">
         <div class="card-header">
-            <a href="{{ route('soas.index') }}">Statement of Account</a> | Create
+            <a href="{{ route('soas.index') }}" class="text-black text-decoration-none">STATEMENT OF ACCOUNT</a> | Create
         </div>
         <div class="card-body">
             <form method="POST" action="{{route('soas.store')}}" enctype="multipart/form-data">
                 @csrf
-                <div class="row mb-4">
+                <div class="row mb-1">
                     @text([
                         'name' => 'id',
                         'disabled' => 1,
@@ -51,7 +51,7 @@
                     ])@endselect
                 </div>
                 
-                <button type="submit" class="btn btn-secondary mt-4 btn-user form-btn" name="status" value="save">
+                <button type="submit" class="btn btn-sm btn-secondary btn-user form-btn" name="status" value="save">
                     <i class="fa-solid fa-floppy-disk"></i> Save
                 </button>
     
@@ -73,7 +73,7 @@
 
         @select2js([
             'column'        => 'client_id',
-            'placeholder'   => 'Select the client',
+            'placeholder'   => 'Select the Client',
             'model_path'    => 'App\Models\tb_crm_mf_client',
         ])@endselect2js
 </script>

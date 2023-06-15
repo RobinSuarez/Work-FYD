@@ -15,7 +15,7 @@
                         'col'   => 'col-lg-4 col-md-6 col-sm-12 px-0',
                         'label_class' => ''
                     ])@endtext
-                    <button type="submit" class="btn btn-secondary form-btn mt-3"><i class="far fa-search" style="font-weight: 900"></i> Search</button>
+                    <button type="submit" class="btn btn-sm btn-secondary form-btn mt-3"><i class="far fa-search" style="font-weight: 900"></i> Search</button>
                 </div>
             </form>
         </div>
@@ -51,7 +51,7 @@
                             {{-- <td><input class="form-check-input" type="checkbox" value="1" {{ ($or->is_active??0) == 1 ? "checked":""}} disabled></td> --}}
                             <td>
                                 <div class="form d-inline">
-                                    <a href="{{ route('ors.edit', ['or' => $or->id]) }}" class="btn btn-secondary action-btn">
+                                    <a href="{{ route('ors.edit', ['or' => $or->id]) }}" class="btn btn-sm btn-secondary action-btn">
                                         <i class="fa-solid fa-pencil"></i>
                                     </a>
                                 </div>
@@ -59,7 +59,7 @@
                                     action="{{ route('ors.destroy', ['or' => $or->id]) }} " class="d-inline">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" value="Delete!" class="btn btn-danger action-btn" onclick="return confirm('Are you sure you want to delete? This action is final')">
+                                    <button type="submit" value="Delete!" class="btn btn-sm btn-danger action-btn" onclick="return confirm('Are you sure you want to delete? This action is final')">
                                         <i class="fa-regular fa-trash-can"></i>
                                     </button>
                                 </form>
@@ -72,7 +72,7 @@
     
             <div class="form d-inline">
                 <a href="{{ route('ors.create') }}"
-                    class="btn btn-secondary mb-3 create-btn">
+                    class="btn btn-sm btn-secondary mb-1 create-btn">
                     <i class="fa-regular fa-plus"></i> New Record
                 </a>
             </div>

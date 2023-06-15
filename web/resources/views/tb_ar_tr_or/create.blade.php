@@ -12,7 +12,7 @@
         <div class="card-body">
             <form method="POST" action="{{route('ors.store')}}" enctype="multipart/form-data">
                 @csrf
-                <div class="row mb-4">
+                <div class="row mb-1">
                     @text([
                         'name'      => 'id',
                         'disabled'  => 1,
@@ -91,7 +91,7 @@
                     ])@endselect
                 </div>
                 
-                <button type="submit" class="btn btn-secondary mt-4 btn-user form-btn" name="status" value="save">
+                <button type="submit" class="btn btn-sm btn-secondary mt-1 btn-user form-btn" name="status" value="save">
                     <i class="fa-solid fa-floppy-disk"></i> Save
                 </button>
     
